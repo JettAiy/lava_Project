@@ -127,7 +127,7 @@ public class PlayerControlHandler : MonoBehaviour
     {
         characterController.SetBullet(bulletParametersSO[currentBullet]);
         bulletText.SetText("Bullet: " + bulletParametersSO[currentBullet].bulletName 
-            + " pwr: " + bulletParametersSO[currentBullet].impactForce.ToString("N"));
+            + " pwr: " + bulletParametersSO[currentBullet].impactForce.ToString("N0"));
     }
     
     private void OnMouseScroll()
