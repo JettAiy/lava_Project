@@ -7,5 +7,6 @@ public class BulletParametersSO : ScriptableObject
 {
     public string bulletName;
     public float impactForce = 300f;
+    public Color color;
 
 }

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletName: medium
   impactForce: 50000
+  color: {r: 0.383277, g: 0.5808424, b: 0.9339623, a: 1}

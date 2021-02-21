@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletName: XXL
   impactForce: 100000
+  color: {r: 1, g: 0, b: 0, a: 1}

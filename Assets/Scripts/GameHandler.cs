@@ -13,11 +13,16 @@ public class GameHandler : Singleton<GameHandler>
     [SerializeField] private CharacterParametersSO playerSO;
     [SerializeField] private CharacterParametersSO enemySO;
 
+    [SerializeField] private TMPro.TextMeshProUGUI scoreTextMesh;
+
     private List<Transform> _cache = new List<Transform>();
 
     [SerializeField] private PlayerControlHandler playerControl;
 
     public Transform[] startPositions;
+
+    private int teamPlayerScore = 0;
+    private int teamEnemyScore = 0;
 
     private void Start()
     {
@@ -57,12 +62,29 @@ public class GameHandler : Singleton<GameHandler>
 
         GO.position = startPosition;
 
-        GO.GetComponent<CharacterController>().Init(charSO);
+        CharacterController characterController = GO.GetComponent<CharacterController>();
+
+        characterController.Init(charSO);
+
+        characterController.DieEvent += CharacterController_DieEvent;
 
         _cache.Add(GO);
 
         return GO;
 
+    }
+
+    private void CharacterController_DieEvent(int team)
+    {
+
+        if (team != 1)
+            teamPlayerScore += 1;
+        else
+            teamEnemyScore += 1;
+
+        string text = $"SCORE: {teamPlayerScore} - {teamEnemyScore}";
+
+        scoreTextMesh.SetText(text); 
     }
 
     #endregion
@@ -86,6 +108,7 @@ public class GameHandler : Singleton<GameHandler>
         Character = CreateCharacter(enemySO, startPositions[indexPos].position);
         Character.name = "Enemy";
     }
+
 
 
     public void CreateHitParticleEffect(Vector3 position)

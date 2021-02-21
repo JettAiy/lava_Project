@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class PlayerControlHandler : MonoBehaviour
+public class PlayerControlHandler : Singleton<PlayerControlHandler>
 {
 
     private CharacterController characterController;
 
-    [SerializeField] private BulletParametersSO[] bulletParametersSO;
+    public BulletParametersSO[] bulletParametersSO;
     private int currentBullet;
 
     Camera camera;
-    [SerializeField] TMPro.TextMeshProUGUI bulletText;
+    [SerializeField] Image bulletImage;
 
     private void Start()
     {
@@ -126,8 +127,7 @@ public class PlayerControlHandler : MonoBehaviour
     private void SetBulletType()
     {
         characterController.SetBullet(bulletParametersSO[currentBullet]);
-        bulletText.SetText("Bullet: " + bulletParametersSO[currentBullet].bulletName 
-            + " pwr: " + bulletParametersSO[currentBullet].impactForce.ToString("N0"));
+        bulletImage.color = bulletParametersSO[currentBullet].color;
     }
     
     private void OnMouseScroll()

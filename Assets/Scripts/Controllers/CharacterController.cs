@@ -15,6 +15,9 @@ public class CharacterController : MonoBehaviour
     public CharacterParametersSO parametersSO;
     private NavMeshAgent agent;
 
+    public delegate void Die(int team);
+    public event Die DieEvent;
+
     //states
     public enum CharacterStates
     {
@@ -67,9 +70,16 @@ public class CharacterController : MonoBehaviour
         rigBuilder = GetComponent<RigBuilder>();
         rigBuilder.enabled = false;
 
+        if (parametersSO.team != 1)
+        {
+            SetBullet(PlayerControlHandler.instance.bulletParametersSO[0]);
+        }
+
         GetComponentInChildren<SpriteRenderer>().color = parametersSO.team == 1 ? Color.green : Color.red;
 
         SetRagdol(false);
+
+
     }
 
     public void SetBullet(BulletParametersSO bulletParametersSO)
@@ -360,7 +370,8 @@ public class CharacterController : MonoBehaviour
     }
 
     private void Dead()
-    {        
+    {
+        DieEvent?.Invoke(parametersSO.team);
         Destroy(this);
     }
 
