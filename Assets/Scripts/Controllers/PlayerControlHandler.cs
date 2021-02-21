@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerControlHandler : MonoBehaviour
 {
@@ -42,11 +43,18 @@ public class PlayerControlHandler : MonoBehaviour
             OnMouseScroll();
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
     }
 
 
     private Vector3? GetRayHitPosition()
     {
+
+        if (EventSystem.current.IsPointerOverGameObject()) return null;
 
         Ray ray = camera.ScreenPointToRay(Input.mousePosition, Camera.MonoOrStereoscopicEye.Mono);
 
