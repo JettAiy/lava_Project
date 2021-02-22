@@ -114,24 +114,10 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator StartDeath(Vector3 forceDir, Vector3 point)
     {
-
-        //transform.forward = forceDir;
-
-        rb.constraints = RigidbodyConstraints.None;
-        //forceDir = transform.up * 5000;
-
-        //Debug.DrawLine(transform.position, transform.forward * 2, Color.cyan, 5f);
-        //Debug.DrawLine(point, point * 2, Color.white, 5f);
-        //Debug.DrawLine(forceDir, forceDir + (forceDir.normalized * 2), Color.yellow, 5f);
-
-        rb.AddForceAtPosition(forceDir, point);
-
-        yield return new WaitForSeconds(0.5f);
-
         SetRagdol(true);
+        yield return new WaitForSeconds(0.1f);
         SetRagdolImpact(forceDir, point);
-            
-
+           
         SetState(CharacterStates.Dead);
     }
 
@@ -160,7 +146,7 @@ public class CharacterController : MonoBehaviour
     {
         foreach (var rbCh in rbs)
         {
-            rbCh.AddTorque(forceDir);
+            rbCh.AddForceAtPosition(forceDir, point);
         }
     }
 

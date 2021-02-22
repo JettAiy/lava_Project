@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bullet_S
   m_EditorClassIdentifier: 
   bulletName: small
-  impactForce: 30000
+  impactForce: 500
   color: {r: 0.91689616, g: 0.9528302, b: 0.6606889, a: 1}

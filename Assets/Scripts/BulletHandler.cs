@@ -51,14 +51,16 @@ public class BulletHandler : MonoBehaviour
             if (characterController.parametersSO.team != team)
             {
                 characterController.GetImpact(-transform.forward * parametersSO.impactForce, collision.contacts[0].point);
+                GameHandler.instance.CreateHitParticleEffect(collision.contacts[0].point, transform.rotation);
             }     
             else
             {
                 return; // we hit our own hitbox
             }
         }
+        else
+            GameHandler.instance.CreateDieParticleEffect(collision.contacts[0].point);
 
-        GameHandler.instance.CreateDieParticleEffect(collision.contacts[0].point);
 
         Destroy(gameObject);
     }

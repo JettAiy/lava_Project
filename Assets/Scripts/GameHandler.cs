@@ -111,11 +111,12 @@ public class GameHandler : Singleton<GameHandler>
 
 
 
-    public void CreateHitParticleEffect(Vector3 position)
+    public void CreateHitParticleEffect(Vector3 position, Quaternion rotation)
     {
         Transform GO = Instantiate(pf_HitPartice);
 
         GO.position = position;
+        GO.rotation = rotation;
 
         Destroy(GO.gameObject, 3f);
     }
